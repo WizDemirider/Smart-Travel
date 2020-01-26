@@ -6,7 +6,9 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-lg-6">
+        <div class="col-xs-12 col-md-8">
+            <h1 style="color:white; margin-left: 30%;">{{city}}</h1>
+            <img src="{{city_img}}" width="80%" style="margin-left: 10%; margin-bottom: 20px">
             <div id='chart' style='width:100%'>
             </div>
             <div class="border-top pt-2">
@@ -23,15 +25,21 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-8 col-lg-6 border-left">
+        <div class="col-xs-12 col-md-4 col-lg-4 border-left">
             <h4 style="color: red;">Suggested Hotels (By Rating)</h4>
-            <ul>
-                <div style="color:white">
-                    {% for hotel in hotels %}
-                    <li>{{hotel}}
-                    {% endfor %}
+            <div style="color:white" class="row pl-5">
+                {% for hotel in hotels %}
+                <div class="col-xs-5">
+                    <div class="card" style="width: 90%;">
+                        <img class="card-img-top" src="{{hotel.3}}" alt="{{hotel.0}} image" height="100px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{hotel.0}} {{hotel.1}}/100</h5>
+                            <p class="card-text">{{hotel.4}}</p>
+                        </div>
+                    </div>
                 </div>
-            </ul>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

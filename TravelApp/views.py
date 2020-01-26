@@ -69,7 +69,8 @@ def places(request, city, No_days):
         'city': city,
         'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
         'calendar_months': calendar.month_name,
-        'hotels': hotels,
+        'hotels': hotels['list_of_hotels'][:5],
+        'city_img': hotels['city_image'],
         'No_days': No_days,
         'iti': iti
         })
