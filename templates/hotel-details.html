@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Hotel Details{% endblock %}
+{% block heading %}{{city}}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <h1 style="color:white; margin-left: 10%;">{{details.hotel_name}}</h1>
+            <div class="border-top pt-2">
+                <ul>
+                <div style="color:white">
+                    {{details}}
+                </div>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4 border-left">
+            <div class="row">
+                <h2 style="color:white;" class="pl-2 col-xs-4 pr-2">Sentiment: </h2>
+                {% if details.hotel_score > 90 %}
+                    <h2 style="color: lime; text-align: right;" class="col-xs-4">{{details.hotel_score}}/100</h2>
+                {% elif details.hotel_score > 75 %}
+                    <h2 style="color: greenyellow; text-align: right;" class="col-xs-4">{{details.hotel_score}}/100</h2>
+                {% elif details.hotel_score > 50 %}
+                    <h2 style="color: yellow; text-align: right;" class="col-xs-4">{{details.hotel_score}}/100</h2>
+                {% elif details.hotel_score > 25 %}
+                    <h2 style="color: orange; text-align: right;" class="col-xs-4">{{details.hotel_score}}/100</h2>
+                {% else %}
+                    <h2 style="color: red; text-align: right;" class="col-xs-4">{{details.hotel_score}}/100</h2>
+                {% endif %}
+            </div>
+            <div class="row">
+                <h2 style="color:white;" class="pl-2 col-xs-4 pr-2">Rating: </h2>
+                {% if details.rating == 5 %}
+                    <h2 style="color: lime; text-align: right;" class="col-xs-4">{{details.rating}}/5</h2>
+                {% elif details.rating == 4 %}
+                    <h2 style="color: greenyellow; text-align: right;" class="col-xs-4">{{details.rating}}/5</h2>
+                {% elif details.rating == 3 %}
+                    <h2 style="color: yellow; text-align: right;" class="col-xs-4">{{details.rating}}/5</h2>
+                {% elif details.rating == 2 %}
+                    <h2 style="color: orange; text-align: right;" class="col-xs-4">{{details.rating}}/5</h2>
+                {% else %}
+                    <h2 style="color: red; text-align: right;" class="col-xs-4">{{details.rating}}/5</h2>
+                {% endif %}
+            </div>
+
+            {% if details.recommendations %}
+            <h4 style="color: red;">You May Also Like</h4>
+            <div style="color:white" class="row pl-5">
+                {% for rec in details.recommendations %}
+                <div class="col-xs-5">
+                    <div class="card" style="width: 90%;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{rec}}</h5>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

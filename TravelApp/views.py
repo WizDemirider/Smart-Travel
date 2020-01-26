@@ -75,6 +75,12 @@ def places(request, city, No_days):
         'iti': iti
         })
 
+def hotelDetail(request, city, slug):
+    hotel_details = extract.get_details(city, slug)
+    hotel_details['hotel_score'] = int(hotel_details['hotel_score'])
+    hotel_details['rating'] = int(hotel_details['rating'])
+    return render(request, 'hotel-details.html', {'city': city, 'details': hotel_details})
+
 @login_required
 def home(request):
     return redirect('suggest-city')
