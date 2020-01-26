@@ -39,4 +39,4 @@ def getSentiments(query):
         chartData[tweet.user.screen_name] = senti
 
     # print(public_tweets)
-    return total_senti/2 
+    return total_senti/10
