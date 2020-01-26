@@ -7,12 +7,29 @@ def get_list_of_hotels(city_name):
     result = requests.get(hotel_list_query)
     soup = bs4.BeautifulSoup(result.text, 'lxml')
 
-    hotels = soup.findAll('div', class_="hotel_img fleft clearfix")
-    list_of_hotels = list()
-    for hotel in hotels:
-        list_of_hotels.append(hotel.find('a')['href'].split('/')[-1])
+    main_dict = dict()
 
-    return list_of_hotels
+    hotels = soup.findAll('div', class_="hotel_img fleft clearfix")
+    hotel_names = soup.findAll('div', class_="hotel_info")
+    hotel_descriptions = soup.findAll('div', class_="tabcontent")
+    hotel_scores = soup.findAll('span', class_="score")
+    city_image = soup.find('div', 'city_bg clearfix')
+    
+    list_hotels = list()
+    for hotel, hotel_name, hotel_score, hotel_description in zip(hotels, hotel_names, hotel_scores, hotel_descriptions):
+        #print(hotel.find('a').text)
+        list_hotels.append((hotel_name.find('h2').a.text ,
+                            hotel_score.text.replace('\n','')[:2],
+                         hotel.find('a')['href'].split('/')[-1],
+                          hotel.find('a').img['src'],
+                        hotel_description.find('p').text.replace('\n','') ))
+    
+    main_dict['list_of_hotels'] = list_hotels
+    main_dict['city_image'] = city_image['style'].split('(')[1].split(')')[0]
+
+
+
+    return main_dict
 
 def get_details(city_name, hotel_name):
     main_dict = dict()
@@ -69,3 +86,12 @@ def get_list_of_cities():
     for city in cities:
         city_list.append(city.find('h4').text)
     return city_list
+<<<<<<< HEAD
+
+#print(get_list_of_cities())
+
+print(get_list_of_hotels('goa'))
+
+#print(get_details('goa', 'the-leela-goa'))
+=======
+>>>>>>> f54f34827caa58cd26af6c47ea0e9d7c422fd253
