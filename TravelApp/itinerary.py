@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import math
-import twitter
+from . import twitter
 
 def gen_it(data, senti, days):
     num_places = days*3

@@ -20,12 +20,14 @@
                             <th> Location </th>
                             <th> Time </th>
                             <th> Score </th>
+                            <th> Sentiment </th>
                         </tr>
                         {% for sc in iti %}
                             <tr>
                                 <td>{{sc.1}}</td>
                                 <td>{{sc.0}}</td>
                                 <td>{{sc.2}}</td>
+                                <td>{{sc.3}}</td>
                             </tr>
                         {% endfor %}
                     </table>

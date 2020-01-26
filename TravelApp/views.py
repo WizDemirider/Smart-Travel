@@ -79,6 +79,14 @@ def hotelDetail(request, city, slug):
     hotel_details = extract.get_details(city, slug)
     hotel_details['hotel_score'] = int(hotel_details['hotel_score'])
     hotel_details['rating'] = int(hotel_details['rating'])
+    my_dict = {}
+    count = 0
+    for k,v in hotel_details['recommendations'].items():
+        my_dict[k] = v
+        count += 1
+        if count == 5:
+            break
+    hotel_details['recommendations']=my_dict
     return render(request, 'hotel-details.html', {'city': city, 'details': hotel_details})
 
 @login_required
