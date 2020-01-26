@@ -13,6 +13,11 @@
                 <h4 style="color: red;">Suggested Itinerary</h4>
                 <ul>
                 <div style="color:white">
+                    {% for sc in iti %}
+                    {{sc.0}} <br>
+                    {{sc.1}} <br>
+                    {{sc.2}} <br>
+                    {% endfor %}
                 </div>
                 </ul>
             </div>

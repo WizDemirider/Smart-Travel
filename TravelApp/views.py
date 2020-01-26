@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 import calendar
 from .models import *
-from . import extract
+from . import extract, itinerary
 
 def index(request):
     return redirect('login')
@@ -64,12 +64,14 @@ def suggestCity(request):
 @login_required
 def places(request, city, No_days):
     hotels = extract.get_list_of_hotels(city)
+    iti = itinerary.get_places(city.lower(), No_days)
     return render(request, 'places.html', {
         'city': city,
         'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
         'calendar_months': calendar.month_name,
         'hotels': hotels,
-        'No_days': No_days
+        'No_days': No_days,
+        'iti': iti
         })
 
 @login_required
