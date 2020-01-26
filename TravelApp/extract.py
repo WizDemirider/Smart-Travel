@@ -25,9 +25,10 @@ def get_list_of_hotels(city_name):
                         hotel_description.find('p').text.replace('\n','') ))
 
     main_dict['list_of_hotels'] = list_hotels
-    main_dict['city_image'] = city_image['style'].split('(')[1].split(')')[0]
-
-
+    if city_image:
+        main_dict['city_image'] = city_image['style'].split('(')[1].split(')')[0]
+    else:
+        main_dict['city_image'] = None
 
     return main_dict
 
@@ -50,8 +51,8 @@ def get_details(city_name, hotel_name):
 
     hotel_images = soup.find('ul', class_='slides')
     main_dict['hotel_image'] = hotel_images.li.img['src']
-    
-    
+
+
 
     reviews = soup.findAll('div', class_='fleft review_content')
     review_dict = dict()
