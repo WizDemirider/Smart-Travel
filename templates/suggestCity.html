@@ -18,7 +18,7 @@
                 <br>
                 <button type="submit" class="btn btn-info">Submit</button>
             </form>
-            <h4 style="color: red;">Suggested Cities</h4>
+            {% if cities %}<h4 style="color: red;">Suggested Cities</h4>{% endif %}
             <ul>
             <div style="color:white">
                 {% for city in cities %}

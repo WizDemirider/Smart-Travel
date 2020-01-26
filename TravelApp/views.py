@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 import calendar
 from .models import *
+from . import extract
 
 def index(request):
     return redirect('login')
@@ -57,15 +58,18 @@ def suggestCity(request):
             'cities': cities[:5],
             'selected_month': request.POST['Month']
         })
+    return render(request, 'suggestCity.html', {'months': [{'val':str(i), 'name':calendar.month_name[i]} for i in range(1,13)]})
 
 @login_required
 def places(request, city):
+    hotels = extract.get_list_of_hotels(city)
     return render(request, 'places.html', {
         'city': city,
         'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
-        'calendar_months': calendar.month_name
+        'calendar_months': calendar.month_name,
+        'hotels': hotels
         })
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    return redirect('suggest-city')

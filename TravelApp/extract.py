@@ -1,5 +1,5 @@
 import requests
-import bs4 
+import bs4
 
 
 def get_list_of_hotels(city_name):
@@ -10,6 +10,7 @@ def get_list_of_hotels(city_name):
     main_dict = dict()
 
     hotels = soup.findAll('div', class_="hotel_img fleft clearfix")
+<<<<<<< HEAD
     hotel_names = soup.findAll('div', class_="hotel_info")
     hotel_descriptions = soup.findAll('div', class_="tabcontent")
     hotel_scores = soup.findAll('span', class_="score")
@@ -36,7 +37,7 @@ def get_details(city_name, hotel_name):
     hotel_list_query = 'https://www.tripexpert.com/'+ city_name +'/hotels/'+ hotel_name
     result = requests.get(hotel_list_query)
     soup = bs4.BeautifulSoup(result.text, 'lxml')
-    
+
     match = soup.find('div', class_='score_badge')
     score = match.div.b.text
     main_dict['hotel_score'] = score
@@ -45,14 +46,14 @@ def get_details(city_name, hotel_name):
     recommendations_score = soup.findAll('span', class_= 'venue-mention-badge')
 
     name = soup.find('div', class_='hotel_head')
-    main_dict['hotel_name'] = name.h1.text 
+    main_dict['hotel_name'] = name.h1.text
 
     reviews = soup.findAll('div', class_='fleft review_content')
     review_dict = dict()
     for review in reviews:
         review_title = review.h3.text.replace('\n','')
         review_content = review.p.span.text
-        review_dict[review_title] = review_content 
+        review_dict[review_title] = review_content
         #print(review_title,": ",review_content)
     main_dict['reviews'] = review_dict
 
@@ -61,7 +62,7 @@ def get_details(city_name, hotel_name):
         recommended_hotel=recommendation.text
         score = score.text
         recommendation_dict[recommended_hotel] = score
-    
+
     main_dict['recommendations'] = recommendation_dict
 
     rating = soup.find('address', class_='clearfix')
@@ -72,7 +73,7 @@ def get_details(city_name, hotel_name):
     contact_no = soup.find('address', class_='clearfix')
     main_dict['contact_no'] = contact_no.em.text.replace('\n','')
 
-    
+
 
     return main_dict
 
@@ -81,14 +82,17 @@ def get_list_of_cities():
     city_list_query = 'https://www.tripexpert.com/destinations'
     result = requests.get(city_list_query)
     soup = bs4.BeautifulSoup(result.text, 'lxml')
-    
+
     cities = soup.findAll('div', class_='destinations_title')
     for city in cities:
         city_list.append(city.find('h4').text)
     return city_list
+<<<<<<< HEAD
 
 #print(get_list_of_cities())
 
 print(get_list_of_hotels('goa'))
 
 #print(get_details('goa', 'the-leela-goa'))
+=======
+>>>>>>> f54f34827caa58cd26af6c47ea0e9d7c422fd253
