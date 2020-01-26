@@ -48,9 +48,8 @@ def get_details(city_name, hotel_name):
     name = soup.find('div', class_='hotel_head')
     main_dict['hotel_name'] = name.h1.text
 
-    #hotel_image = soup.find('li', class_='')
-    #print(hotel_image.img['src'])
-    #main_dict['hotel_image'] = hotel_image.img['src']
+    hotel_images = soup.find('ul', class_='slides')
+    main_dict['hotel_image'] = hotel_images.li.img['src']
     
     
 
