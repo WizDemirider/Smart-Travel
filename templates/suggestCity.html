@@ -22,7 +22,7 @@
             <ul>
             <div style="color:white">
                 {% for city in cities %}
-                <li>{{city.0}}
+                <li><a href="{% url 'places' city.0 %}">{{city.0}}</a>
                 {% endfor %}
             </div>
             </ul>

@@ -59,5 +59,13 @@ def suggestCity(request):
         })
 
 @login_required
+def places(request, city):
+    return render(request, 'places.html', {
+        'city': city,
+        'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
+        'calendar_months': calendar.month_name
+        })
+
+@login_required
 def home(request):
     return render(request, 'home.html')
