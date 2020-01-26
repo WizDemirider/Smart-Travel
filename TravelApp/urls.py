@@ -8,5 +8,5 @@ urlpatterns = [
     path('signup', views.signupUser, name="signup"),
     path('home', views.home, name="home"),
     path('suggest-city', views.suggestCity, name="suggest-city"),
-    path('places/<str:city>', views.places, name="places"),
+    path('places/<str:city>/<int:No_days>', views.places, name="places"),
 ]

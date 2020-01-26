@@ -56,18 +56,20 @@ def suggestCity(request):
         return render(request, 'suggestCity.html', {
             'months': [{'val':str(i), 'name':calendar.month_name[i]} for i in range(1,13)],
             'cities': cities[:5],
-            'selected_month': request.POST['Month']
+            'selected_month': request.POST['Month'],
+            'No_days': request.POST['No_days']
         })
     return render(request, 'suggestCity.html', {'months': [{'val':str(i), 'name':calendar.month_name[i]} for i in range(1,13)]})
 
 @login_required
-def places(request, city):
+def places(request, city, No_days):
     hotels = extract.get_list_of_hotels(city)
     return render(request, 'places.html', {
         'city': city,
         'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
         'calendar_months': calendar.month_name,
-        'hotels': hotels
+        'hotels': hotels,
+        'No_days': No_days
         })
 
 @login_required
