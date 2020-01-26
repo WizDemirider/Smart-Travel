@@ -46,6 +46,17 @@ def get_details(city_name, hotel_name):
         recommendation_dict[recommended_hotel] = score
 
     main_dict['recommendations'] = recommendation_dict
+
+    rating = soup.find('address', class_='clearfix')
+    main_dict['rating'] = rating.p.text.replace('\n','')[0]
+
+    address = soup.find('p', class_='address')
+    main_dict['address'] = address.a.text
+    contact_no = soup.find('address', class_='clearfix')
+    main_dict['contact_no'] = contact_no.em.text.replace('\n','')
+
+
+
     return main_dict
 
 def get_list_of_cities():
