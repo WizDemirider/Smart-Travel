@@ -46,6 +46,17 @@ def get_details(city_name, hotel_name):
         recommendation_dict[recommended_hotel] = score
     
     main_dict['recommendations'] = recommendation_dict
+
+    rating = soup.find('address', class_='clearfix')
+    main_dict['rating'] = rating.p.text.replace('\n','')[0]
+
+    address = soup.find('p', class_='address')
+    main_dict['address'] = address.a.text
+    contact_no = soup.find('address', class_='clearfix')
+    main_dict['contact_no'] = contact_no.em.text.replace('\n','')
+
+    
+
     return main_dict
 
 def get_list_of_cities():
@@ -59,8 +70,8 @@ def get_list_of_cities():
         city_list.append(city.find('h4').text)
     return city_list
 
-print(get_list_of_cities())
+#print(get_list_of_cities())
 
-print(get_list_of_hotels('barcelona'))
+#print(get_list_of_hotels('barcelona'))
 
-print(get_details('barcelona', 'hotel-arts-barcelona'))
+print(get_details('goa', 'the-leela-goa'))
