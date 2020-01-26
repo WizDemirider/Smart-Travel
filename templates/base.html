@@ -85,7 +85,7 @@
               </div>
             </form>
             <div class="navbar-brand">
-              <i class="fa fa-user-circle pl-2 pr-1"></i>{{request.user.username}}
+              <i class="fa fa-user-circle pl-2 pr-1"></i>{{request.user.username|capfirst}}
             </div>
           </div>
         </div>
@@ -320,6 +320,8 @@
 
     });
   </script>
+
+{% block extrajs %}{% endblock %}
 </body>
 
 </html>

@@ -19,7 +19,7 @@ class MonthlyCityReview(models.Model):
     score = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.city.name + " in " + calendar.month_name[month]
+        return self.city.name + " in " + calendar.month_name[int(self.month)]
 
 
 def populateFromFile():

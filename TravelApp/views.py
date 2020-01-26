@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+import calendar
+from .models import *
+
 def index(request):
     return redirect('login')
 
@@ -48,8 +51,20 @@ def logoutUser(request):
 @login_required
 def suggestCity(request):
     if request.method == 'POST':
-        pass
-    return render(request, 'suggestCity.html')
+        cities = [(review.city.name, review.score) for review in MonthlyCityReview.objects.filter(month=request.POST['Month']).order_by('-score')]
+        return render(request, 'suggestCity.html', {
+            'months': [{'val':str(i), 'name':calendar.month_name[i]} for i in range(1,13)],
+            'cities': cities[:5],
+            'selected_month': request.POST['Month']
+        })
+
+@login_required
+def places(request, city):
+    return render(request, 'places.html', {
+        'city': city,
+        'graph_data': [review.score for review in MonthlyCityReview.objects.filter(city_id=city).order_by('month')],
+        'calendar_months': calendar.month_name
+        })
 
 @login_required
 def home(request):
