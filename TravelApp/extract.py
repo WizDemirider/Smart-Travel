@@ -10,7 +10,6 @@ def get_list_of_hotels(city_name):
     main_dict = dict()
 
     hotels = soup.findAll('div', class_="hotel_img fleft clearfix")
-<<<<<<< HEAD
     hotel_names = soup.findAll('div', class_="hotel_info")
     hotel_descriptions = soup.findAll('div', class_="tabcontent")
     hotel_scores = soup.findAll('span', class_="score")
