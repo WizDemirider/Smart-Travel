@@ -5,19 +5,20 @@ import math
 
 def gen_it(data, days):
     num_places = days*3
-    time = ["Between 8 and noon", "Post noon", "Evening or night"]
+    time = ["Morning", "Afternoon", "Evening"]
     places = []
     price = []
     for key in data.keys():
         places.append(key)
-    if num_places > len(data):
-        places[:num_places]
+    if num_places < len(data):
+        places = places[:num_places]
     for p in places:
         price.append(data[p])
 
-    print("Time\tPlace\tPrice")
-    for i in range(0, num_places):
-        print(str(time[i%3]) + "\t" + str(places[i]) + "\t" + str(price[i]))
+    out = []
+    for i in range(0, len(places)):
+        out.append((time[i%3], places[i], price[i]))
+    return out
 
 
 def get_places(term, days):
@@ -30,7 +31,7 @@ def get_places(term, days):
             break
         data[i.text] = int(math.ceil(random.randint(30,300) / 10)) * 10
 
-    gen_it(data, days)
+    return gen_it(data, days)
 
 
 def get_it(term, days):
@@ -49,7 +50,3 @@ def get_it(term, days):
                 td = tr.find_all('td')
                 row = [i.text for i in td]
                 print(row)
-        else:
-            print("Nope")
-
-get_places("mumbai", 3)

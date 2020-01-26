@@ -14,7 +14,7 @@ def get_list_of_hotels(city_name):
     hotel_descriptions = soup.findAll('div', class_="tabcontent")
     hotel_scores = soup.findAll('span', class_="score")
     city_image = soup.find('div', 'city_bg clearfix')
-    
+
     list_hotels = list()
     for hotel, hotel_name, hotel_score, hotel_description in zip(hotels, hotel_names, hotel_scores, hotel_descriptions):
         #print(hotel.find('a').text)
@@ -23,7 +23,7 @@ def get_list_of_hotels(city_name):
                          hotel.find('a')['href'].split('/')[-1],
                           hotel.find('a').img['src'],
                         hotel_description.find('p').text.replace('\n','') ))
-    
+
     main_dict['list_of_hotels'] = list_hotels
     main_dict['city_image'] = city_image['style'].split('(')[1].split(')')[0]
 
@@ -94,6 +94,5 @@ def get_list_of_cities():
     cities = soup.findAll('div', class_='destinations_title')
     for city in cities:
         city_list.append(city.find('h4').text)
-    return city_list
 
-print(get_details('goa','the-leela-goa'))
+    return city_list

@@ -16,13 +16,15 @@
                     {% endfor %}
                 </select>
                 <br>
+                <label for="No_days">Number of days</label>
+                <input type="number" name="No_days" value="10" class="form-control"><br>
                 <button type="submit" class="btn btn-info">Submit</button>
             </form>
             {% if cities %}<h4 style="color: red;">Suggested Cities</h4>{% endif %}
             <ul>
             <div style="color:white">
                 {% for city in cities %}
-                <li><a href="{% url 'places' city.0 %}">{{city.0}}</a>
+                <li><a href="{% url 'places' city.0 No_days %}">{{city.0}}</a>
                 {% endfor %}
             </div>
             </ul>
