@@ -12,6 +12,9 @@
             <h4 style="color: red;">Suggested Places</h4>
             <ul>
             <div style="color:white">
+                {% for hotel in hotels %}
+                <li>{{hotel}}
+                {% endfor %}
             </div>
             </ul>
         </div>
